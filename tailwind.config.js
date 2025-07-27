@@ -9,6 +9,9 @@ export default {
             fontFamily: {
                 fjalla: ['"Fjalla One"', 'sans-serif'],
                 orbitron: ["Orbitron", "sans-serif"],
+            },
+            backgroundImage: {
+                "header" : "url('/bg.jpg')",
             }
         },
     },

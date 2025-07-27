@@ -1,11 +1,15 @@
 import {NavLink, useLocation} from "react-router-dom";
+import {useMemo} from "react";
+import FormBusuqeda from "./FormBusuqeda.tsx";
 
 const Header = () => {
     const location = useLocation();
-    console.log(location.pathname)
+    const isHome = useMemo(() => location.pathname === "/", [location.pathname]);
     return (
         <>
-            <header className="bg-slate-800 mx-auto container px-5 py-16 font-fjalla">
+            <header
+                className={isHome ? "bg-header bg-center min-h-screen bg-cover mx-auto container px-5 py-16 font-fjalla"
+                    : "bg-slate-800 bg-no-repeat bg-cover mx-auto container px-5 py-16 font-fjalla"}>
                 <div className="md:flex justify-between items-center">
                     <div>
                         <img src="/logo.svg" alt="Logotipo Aplicacion" className="w-32"/>
@@ -27,6 +31,14 @@ const Header = () => {
                         >Favoritos</NavLink>
                     </nav>
                 </div>
+                {isHome ? (
+                    <>
+
+                        <FormBusuqeda/>
+                    </>
+                ) : (
+                    <p></p>
+                )}
             </header>
         </>
     );
