@@ -1,12 +1,21 @@
 import {useForm} from "react-hook-form";
 import type {BusquedaRecenta} from "../types";
+import {useAppStore} from "../stores/useAppStore.ts";
+import {useEffect} from "react";
 
 const FormBusuqeda = () => {
+    const {fetchCategorias, categorias} = useAppStore();
     const {register, handleSubmit, formState: {errors}} = useForm<BusquedaRecenta>();
+
     function peticionBusquedaRecentas(data: BusquedaRecenta) {
         console.log("Buscando recetas")
         console.log(data);
     }
+
+    useEffect(() => {
+        fetchCategorias();
+    }, [])
+
     return (
         <>
             <div className="px-5 py-5 rounded-lg 0">
@@ -37,6 +46,11 @@ const FormBusuqeda = () => {
                             })}
                         >
                             <option value="">--- Selecciona una Opción ---</option>
+                            {categorias.drinks.map((categoria) => {
+                                return (
+                                    <option key={categoria.strCategory} value={categoria.strCategory}>{categoria.strCategory}</option>
+                                );
+                            })}
                         </select>
                         <div className="bg-red-100 text-center text-red-600 mt-1 rounded-md">
                             {errors.categoria && String(errors.categoria.message)}
