@@ -23,7 +23,6 @@ export async function getRecetas(data: BusquedaRecenta) {
     // eslint-disable-next-line no-useless-catch
     try {
         const {data} = await axios.get(urlByCategoria);
-        console.log
         const result = responseAPIRecetas.safeParse(data);
         if (result.success) {
             return data;
