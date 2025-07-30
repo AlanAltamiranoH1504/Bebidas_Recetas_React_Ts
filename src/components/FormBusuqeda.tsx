@@ -4,12 +4,11 @@ import {useAppStore} from "../stores/useAppStore.ts";
 import {useEffect} from "react";
 
 const FormBusuqeda = () => {
-    const {fetchCategorias, categorias} = useAppStore();
+    const {fetchCategorias, categorias, searchRecetas} = useAppStore();
     const {register, handleSubmit, formState: {errors}} = useForm<BusquedaRecenta>();
 
     function peticionBusquedaRecentas(data: BusquedaRecenta) {
-        console.log("Buscando recetas")
-        console.log(data);
+        searchRecetas(data);
     }
 
     useEffect(() => {
