@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {responseAPICategoriasSchema, responseAPIRecetas} from "../schemas/recetasSchema.ts";
+import {responseAPICategoriasSchema, responseAPIReceta, responseAPIRecetas} from "../schemas/recetasSchema.ts";
 import type {BusquedaRecenta} from "../types";
 
 export async function getCategorias() {
@@ -28,6 +28,22 @@ export async function getRecetas(data: BusquedaRecenta) {
             return data;
         } else {
             console.log("Error en busqueda de recetas");
+        }
+    } catch (e) {
+        throw e;
+    }
+}
+
+export async function getRecetaById(idReceta: string) {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idReceta}`;
+    // eslint-disable-next-line no-useless-catch
+    try {
+        const {data} = await axios.get(url);
+        const result = responseAPIReceta.safeParse(data);
+        if (result.success) {
+            return data;
+        } else {
+            console.log("Error en busqueda de receta");
         }
     } catch (e) {
         throw e;

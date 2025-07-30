@@ -1,18 +1,23 @@
 import type {StateCreator} from "zustand/vanilla";
-import {getCategorias, getRecetas} from "../services/RecetasService.ts";
-import type {BusquedaRecenta, Categorias, Recetas} from "../types";
+import {getCategorias, getRecetaById, getRecetas} from "../services/RecetasService.ts";
+import type {BusquedaRecenta, Categorias, Drink, Recetas} from "../types";
 
 export type RecetasSliceType = {
     categorias: Categorias,
     recetas: Recetas,
+    drink: Drink,
     fetchCategorias(): void,
-    searchRecetas(data: BusquedaRecenta): Promise<void>
+    searchRecetas(data: BusquedaRecenta): Promise<void>,
+    selectReceta(idReceta: string): void
 }
 export const createRecetasSlice: StateCreator<RecetasSliceType> = (set) => ({
     categorias: {
         drinks: []
     },
     recetas: {
+        drinks: []
+    },
+    drink: {
         drinks: []
     },
     fetchCategorias: async () => {
@@ -25,6 +30,12 @@ export const createRecetasSlice: StateCreator<RecetasSliceType> = (set) => ({
         const recetas = await getRecetas(data);
         set({
             recetas
+        });
+    },
+    selectReceta: async (idReceta: string) => {
+        const {drinks} = await getRecetaById(idReceta);
+        set({
+            drink: drinks
         });
     }
 })
