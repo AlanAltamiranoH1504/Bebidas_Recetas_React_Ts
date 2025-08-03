@@ -4,9 +4,12 @@ import {useAppStore} from "../stores/useAppStore.ts";
 import type {Recetas} from "../types";
 
 export default function Modal() {
-    const {modal, drink, closeModel} = useAppStore();
+    const {modal, drink, closeModel, handleClickFavorito, favoritos} = useAppStore();
     // @ts-ignore
     const receta = drink[0];
+    const existeEnFavoritos = favoritos.some((favorito) => {
+        return favorito.idDrink === receta.idDrink;
+    });
     if (!receta) {
         return null;
     }
@@ -77,11 +80,12 @@ export default function Modal() {
                                     <div className="mt-5 flex justify-between gap-2">
                                         <button
                                             onClick={() => {
-
+                                                handleClickFavorito(receta);
                                             }}
                                             type="button"
-                                            className="w-full rounded bg-orange-500 p-3 font-bold uppercase text-white shadow-md hover:bg-orange-600 transition-colors duration-500"
-                                        >Añadir a favoritos</button>
+                                            className={existeEnFavoritos ? "w-full rounded bg-red-600 p-3 font-bold uppercase text-white shadow-md hover:bg-red-700 transition-colors duration-500": "w-full rounded bg-orange-500 p-3 font-bold uppercase text-white shadow-md hover:bg-orange-600 transition-colors duration-500"}
+                                            // className="w-full rounded bg-orange-500 p-3 font-bold uppercase text-white shadow-md hover:bg-orange-600 transition-colors duration-500"
+                                        >{existeEnFavoritos ? "Eliminar de favoritos": "Agregar a Favoritos"}</button>
                                         <button
                                             onClick={() => {
                                                 closeModel();
