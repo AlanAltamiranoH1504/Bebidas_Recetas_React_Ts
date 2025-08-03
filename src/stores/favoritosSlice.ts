@@ -1,3 +1,4 @@
+// @ts-ignore
 import {StateCreator} from "zustand/vanilla";
 import type {Recetas} from "../types";
 
@@ -6,7 +7,7 @@ export type FavoritosSliceType = {
     handleClickFavorito: (receta: Recetas) => void
 }
 
-export const createFavoritosSlice: StateCreator<FavoritosSliceType> = (setState, getState, store) => ({
+export const createFavoritosSlice: StateCreator<FavoritosSliceType> = (setState, getState) => ({
     favoritos: [],
     handleClickFavorito: (receta: Recetas) => {
         const existeFavorito = getState().favoritos.filter((favorito) => {
@@ -26,5 +27,14 @@ export const createFavoritosSlice: StateCreator<FavoritosSliceType> = (setState,
                 ]
             });
         }
-    }
+        // localStorage.setItem("favoritos", JSON.stringify(getState().favoritos));
+    },
+    // cargarFavoritosLocalStorage: () => {
+    //     const favoritosStorage = localStorage.getItem("favoritos");
+    //     if (favoritosStorage) {
+    //         setState({
+    //             favoritos: JSON.parse(favoritosStorage)
+    //         });
+    //     }
+    // }
 });

@@ -2,6 +2,7 @@ import {Dialog, Transition} from '@headlessui/react';
 import {Fragment, type JSX} from 'react';
 import {useAppStore} from "../stores/useAppStore.ts";
 import type {Recetas} from "../types";
+import {toast} from "react-toastify";
 
 export default function Modal() {
     const {modal, drink, closeModel, handleClickFavorito, favoritos} = useAppStore();
@@ -81,10 +82,11 @@ export default function Modal() {
                                         <button
                                             onClick={() => {
                                                 handleClickFavorito(receta);
+                                                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                                                existeEnFavoritos ? toast.info("Eliminado de favoritos") : toast.success("Agregado a favoritos");
                                             }}
                                             type="button"
                                             className={existeEnFavoritos ? "w-full rounded bg-red-600 p-3 font-bold uppercase text-white shadow-md hover:bg-red-700 transition-colors duration-500": "w-full rounded bg-orange-500 p-3 font-bold uppercase text-white shadow-md hover:bg-orange-600 transition-colors duration-500"}
-                                            // className="w-full rounded bg-orange-500 p-3 font-bold uppercase text-white shadow-md hover:bg-orange-600 transition-colors duration-500"
                                         >{existeEnFavoritos ? "Eliminar de favoritos": "Agregar a Favoritos"}</button>
                                         <button
                                             onClick={() => {

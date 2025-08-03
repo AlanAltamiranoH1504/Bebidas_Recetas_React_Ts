@@ -2,6 +2,7 @@ import {useAppStore} from "../stores/useAppStore.ts";
 import DrinkCard from "../components/DrinkCard.tsx";
 
 const FavoritosView = () => {
+    // @ts-ignore
     const {favoritos} = useAppStore();
     return (
         <>
@@ -18,7 +19,7 @@ const FavoritosView = () => {
                 </>
             ):(
                 <>
-                    <h2>No hay favoritos disponibles</h2>
+                    <h2 className="text-center text-3xl">No hay favoritos disponibles</h2>
                 </>
             )}
         </>
