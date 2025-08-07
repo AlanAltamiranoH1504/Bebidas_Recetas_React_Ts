@@ -2,7 +2,7 @@ import {useAppStore} from "../stores/useAppStore.ts";
 import DrinkCard from "../components/DrinkCard.tsx";
 
 const FavoritosView = () => {
-    // @ts-ignore
+    // @ts-expect-error
     const {favoritos} = useAppStore();
     return (
         <>

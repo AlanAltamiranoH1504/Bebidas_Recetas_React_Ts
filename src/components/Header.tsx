@@ -29,6 +29,13 @@ const Header = () => {
                                 isActive ? "text-orange-500 uppercase text-xl hover:text-orange-600 transition-colors duration-500" : "text-white uppercase text-xl hover:text-gray-300 transition-colors duration-500"
                             }
                         >Favoritos</NavLink>
+                        <NavLink
+                            to="/ia"
+                            // className="text-white uppercase text-xl hover:text-gray-300 transition-colors duration-500"
+                            className={({isActive}) =>
+                                isActive ? "text-orange-500 uppercase text-xl hover:text-orange-600 transition-colors duration-500" : "text-white uppercase text-xl hover:text-gray-300 transition-colors duration-500"
+                            }
+                        >Generar con IA</NavLink>
                     </nav>
                 </div>
                 {isHome ? (
